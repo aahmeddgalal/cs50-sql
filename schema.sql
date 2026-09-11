@@ -6,13 +6,15 @@ CREATE TABLE "riders" (
 
 CREATE TABLE "stations" (
     "id" INTEGER,
-    "name" TEXT,
-    "line" TEXT,
+    "name" TEXT NOT NULL,
+    "line" TEXT NOT NULL,
+    "type" TEXT NOT NULL CHECK ("type" IN ('enter', 'exit'))
+    "datetime" NUMERIC NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY("id")
 );
 
 CREATE TABLE "visits" (
-    "rider_id" INTEGER,
+    "rider_id" INTEGER ,
     "station_id" INTEGER
     FOREIGN KEY("rider_id") REFERENCES "riders"("id"),
     FOREIGN KEY("station_id") REFERENCES "stations"("id") 
